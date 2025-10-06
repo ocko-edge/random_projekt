@@ -30,6 +30,7 @@
         {
             button1 = new Button();
             label1 = new Label();
+            listBox1 = new ListBox();
             SuspendLayout();
             // 
             // button1
@@ -51,11 +52,21 @@
             label1.TabIndex = 1;
             label1.Text = "label1";
             // 
+            // listBox1
+            // 
+            listBox1.FormattingEnabled = true;
+            listBox1.ItemHeight = 15;
+            listBox1.Location = new Point(73, 170);
+            listBox1.Name = "listBox1";
+            listBox1.Size = new Size(122, 19);
+            listBox1.TabIndex = 2;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(listBox1);
             Controls.Add(label1);
             Controls.Add(button1);
             Name = "Form1";
@@ -68,5 +79,6 @@
 
         private Button button1;
         private Label label1;
+        private ListBox listBox1;
     }
 }
