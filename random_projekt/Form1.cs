@@ -11,7 +11,7 @@ namespace random_projekt
         private void calculateButton_Click(object sender, EventArgs e)
         {
             float result = myMath.calculateEntry(entryArea.Text, entryArea);
-            label1.Text = (result * -2).ToString();
+            label1.Text = (-result * 2).ToString();
             label2.Text = (result * 2).ToString();
         }
     }
