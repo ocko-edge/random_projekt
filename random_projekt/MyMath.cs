@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -9,84 +10,57 @@ namespace random_projekt
 {
     internal class MyMath
     {
-        float result;
+        public float result;
 
         public float calculateEntry(string mathematicalEntry, TextBox entryArea)
         {
-            List<object> entries = new List<object>();
-
-            foreach (char c in mathematicalEntry)
+            try
             {
-                entries.Add(c);
-            }
+                // Convert ^ operators to Power() syntax
+                string expression = ConvertExponentiation(mathematicalEntry);
 
-            for (int i = 0; i < entries.Count; i++)
+                // Create DataTable
+                DataTable table = new DataTable();
+
+                // Evaluate expression
+                object evalResult = table.Compute(expression, "");
+
+                // Convert to float and save to field
+                result = Convert.ToSingle(evalResult);
+
+                return result;
+            }
+            catch (Exception ex)
             {
-                string current = entries[i].ToString();
-                if (current == "^")
-                {
-                    float left = float.Parse(entries[i - 1].ToString());
-                    float right = float.Parse(entries[i + 1].ToString());
-                    float temp = (float)Math.Pow(left, right);
-
-                    entries[i - 1] = temp.ToString();
-                    entries.RemoveAt(i);
-                    entries.RemoveAt(i);
-                    i--;
-                }
+                MessageBox.Show("Invalid expression: " + ex.Message);
+                return 0;
             }
+        }
 
-            for (int i = 0; i < entries.Count; i++)
+        // Converts something like 2^3+4 into Power(2,3)+4
+        private string ConvertExponentiation(string expr)
+        {
+            while (expr.Contains("^"))
             {
-                string current = entries[i].ToString();
-                if (current == "*" || current == "/")
-                {
-                    float left = float.Parse(entries[i - 1].ToString());
-                    float right = float.Parse(entries[i + 1].ToString());
-                    float temp;
+                int index = expr.IndexOf('^');
 
-                    if (current == "*")
-                    {
-                        temp = left * right;
-                    }
-                    else
-                    {
-                        temp = left / right;
-                    }
+                // Find left number
+                int left = index - 1;
+                while (left >= 0 && (char.IsDigit(expr[left]) || expr[left] == '.'))
+                    left--;
 
-                    entries[i - 1] = temp.ToString();
-                    entries.RemoveAt(i);
-                    entries.RemoveAt(i); 
-                    i--;
-                }
+                // Find right number
+                int right = index + 1;
+                while (right < expr.Length && (char.IsDigit(expr[right]) || expr[right] == '.'))
+                    right++;
+
+                string leftNum = expr.Substring(left + 1, index - left - 1);
+                string rightNum = expr.Substring(index + 1, right - index - 1);
+
+                string powerExpr = $"Power({leftNum},{rightNum})";
+                expr = expr.Substring(0, left + 1) + powerExpr + expr.Substring(right);
             }
-
-            for (int i = 0; i < entries.Count; i++)
-            {
-                string current = entries[i].ToString();
-                if (current == "+" || current == "-")
-                {
-                    float left = float.Parse(entries[i - 1].ToString());
-                    float right = float.Parse(entries[i + 1].ToString());
-                    float temp;
-
-                    if (current == "+")
-                    {
-                        temp = left + right;
-                    }
-                    else
-                    {
-                        temp = left - right;
-                    }
-
-                    entries[i - 1] = temp.ToString();
-                    entries.RemoveAt(i); 
-                    entries.RemoveAt(i); 
-                    i--;
-                }
-            }
-            result = float.Parse(entries[0].ToString());
-            return result;
+            return expr;
         }
     }
-}
+ }
