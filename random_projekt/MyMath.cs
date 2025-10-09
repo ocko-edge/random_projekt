@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace random_projekt
 {
@@ -16,18 +12,16 @@ namespace random_projekt
         {
             try
             {
-                // Convert ^ operators to Power() syntax
-                string expression = ConvertExponentiation(mathematicalEntry);
-
-                // Create DataTable
+                // Create DataTable to use Compute
                 DataTable table = new DataTable();
 
-                // Evaluate expression
-                object evalResult = table.Compute(expression, "");
+                // Evaluate the math expression
+                object evalResult = table.Compute(mathematicalEntry, "");
 
-                // Convert to float and save to field
+                // Convert to float
                 result = Convert.ToSingle(evalResult);
 
+                // Return or show result
                 return result;
             }
             catch (Exception ex)
@@ -36,31 +30,5 @@ namespace random_projekt
                 return 0;
             }
         }
-
-        // Converts something like 2^3+4 into Power(2,3)+4
-        private string ConvertExponentiation(string expr)
-        {
-            while (expr.Contains("^"))
-            {
-                int index = expr.IndexOf('^');
-
-                // Find left number
-                int left = index - 1;
-                while (left >= 0 && (char.IsDigit(expr[left]) || expr[left] == '.'))
-                    left--;
-
-                // Find right number
-                int right = index + 1;
-                while (right < expr.Length && (char.IsDigit(expr[right]) || expr[right] == '.'))
-                    right++;
-
-                string leftNum = expr.Substring(left + 1, index - left - 1);
-                string rightNum = expr.Substring(index + 1, right - index - 1);
-
-                string powerExpr = $"Power({leftNum},{rightNum})";
-                expr = expr.Substring(0, left + 1) + powerExpr + expr.Substring(right);
-            }
-            return expr;
-        }
     }
- }
+}
