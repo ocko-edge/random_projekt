@@ -10,7 +10,7 @@ namespace random_projekt
     {
         float result;
 
-        public float calculateEntry(string mathematicalEntry)
+        public float calculateEntry(string mathematicalEntry, TextBox entryArea)
         {
             if (float.TryParse(entryArea.Text, out result))
             {
