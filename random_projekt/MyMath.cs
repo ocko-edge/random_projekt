@@ -85,6 +85,7 @@ namespace random_projekt
                     i--;
                 }
             }
+            result = float.Parse(entries[0].ToString());
             return result;
         }
     }
