@@ -144,9 +144,9 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Tahoma", 18F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            label3.Location = new Point(288, 393);
+            label3.Location = new Point(273, 377);
             label3.Name = "label3";
-            label3.Size = new Size(38, 15);
+            label3.Size = new Size(28, 29);
             label3.TabIndex = 8;
             label3.Text = "0";
             // 
@@ -154,9 +154,9 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Tahoma", 18F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            label4.Location = new Point(504, 389);
+            label4.Location = new Point(495, 377);
             label4.Name = "label4";
-            label4.Size = new Size(38, 15);
+            label4.Size = new Size(28, 29);
             label4.TabIndex = 9;
             label4.Text = "0";
             // 
