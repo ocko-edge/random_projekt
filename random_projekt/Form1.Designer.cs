@@ -56,6 +56,7 @@
             calculateButton.TabIndex = 1;
             calculateButton.Text = "Calculate";
             calculateButton.UseVisualStyleBackColor = true;
+            calculateButton.Click += calculateButton_Click;
             // 
             // panel1
             // 
