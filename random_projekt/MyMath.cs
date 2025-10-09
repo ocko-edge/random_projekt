@@ -8,5 +8,18 @@ namespace random_projekt
 {
     internal class MyMath
     {
+        float result;
+
+        public float calculateEntry(string mathematicalEntry)
+        {
+            if (float.TryParse(entryArea.Text, out result))
+            {
+                return result;
+            }
+            else
+            {
+                return result = 0;
+            }
+        }
     }
 }
