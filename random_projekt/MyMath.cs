@@ -11,7 +11,7 @@ namespace random_projekt
     {
         float result;
 
-        public void calculateEntry(string mathematicalEntry, TextBox entryArea)
+        public float calculateEntry(string mathematicalEntry, TextBox entryArea)
         {
             List<object> entries = new List<object>();
 
@@ -85,8 +85,7 @@ namespace random_projekt
                     i--;
                 }
             }
-            result = float.Parse(entries[0].ToString());
-            MessageBox.Show(result.ToString());
+            return result;
         }
     }
 }
